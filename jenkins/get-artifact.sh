@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # clean up local environment
 ls -laG
 find . -name "*.zip*" -exec rm -f {} \;
