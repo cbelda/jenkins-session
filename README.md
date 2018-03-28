@@ -1,27 +1,25 @@
-# JenkinsSessionNg
+# Jenkins Session Angular project
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.1.
+![](img/cicd.png)
 
-## Development server
+This Angular project is prepared to be executed in a CI/CD environment, adding some stuff:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## 1. `java/` directory
 
-## Code scaffolding
+From this folder we can execute a `mvn deploy` and Maven will push the zipped artifact (just a zipped `dist/` directory created by `ng build [...]`) and push it to the [specified Nexus URL](https://github.com/cbelda/jenkins-session/blob/master/java/pom.xml#L30-L36). To achieve that we'll need 2 files:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- `pom.xml`
+- `resource.xml`
 
-## Build
+## 2. `jenkins/` directory
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+Both pipeline and job content (the Job is completed with the script created in the [deployment directory](https://github.com/cbelda/jenkins-session/tree/master/deployment)).
 
-## Running unit tests
+- `Jenkinsfile` (groovy script for the **Pipeline**)
+- `get-artifact.sh``(first step of the deployment **Job**)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## 3. `deployment/` directory
 
-## Running end-to-end tests
+The `deploy.sh` could be placed beforehand in the Remote Server used for deployment. It contains some Docker commands to restart the application (in this case, to restart an NGINX container that serves the Angular client's artifact).
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+It will be executed as a final step of the CI/CD process.

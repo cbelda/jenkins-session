@@ -11,6 +11,10 @@
             <excludes>
                 <exclude>pom.xml</exclude>
                 <exclude>resource.xml</exclude>
+                <exclude>README.md</exclude>
+                <exclude>../deployment</exclude>
+                <exclude>../img</exclude>
+                <exclude>../jenkins</exclude>
             </excludes>
         </fileSet>
     </fileSets>
