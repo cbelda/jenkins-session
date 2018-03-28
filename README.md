@@ -23,3 +23,7 @@ Both pipeline and job content (the Job is completed with the script created in t
 The `deploy.sh` could be placed beforehand in the Remote Server used for deployment. It contains some Docker commands to restart the application (in this case, to restart an NGINX container that serves the Angular client's artifact).
 
 It will be executed as a final step of the CI/CD process.
+
+## 4. Karma configuration
+
+The Jenkins pipeline uses a [Chrome Headless]() browser to execute the Angular tests. This configuration is done in the `karma.conf` adding a [customLauncher](https://github.com/cbelda/jenkins-session/blob/master/karma.conf.js#L15-L26) and a [browser](https://github.com/cbelda/jenkins-session/blob/master/karma.conf.js#L42) to be called from the CLI: `ng test --browsers ChromeHeadless [...]`.
